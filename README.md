@@ -1,4 +1,4 @@
-Cette repo contient des Vagrantfile prêt pour facilité le déploiement de VM pour plusieurs architecture de processeur nottament pour les Mac M1
+Cette repo contient des Vagrantfile prêt pour faciliter le déploiement de VM pour plusieurs architectures de processeurs nottament pour les Mac M1.
 
 # Installation de VMware pour Vagrant
 
