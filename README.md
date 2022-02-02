@@ -21,7 +21,7 @@ $ vagrant plugin update vagrant-vmware-desktop
 ```
 ### Instalation de VMware Utility
 
-Malgré l'installation du plugin, il faut aussi installer l'utilitaire qui permettra de mettre en relation Vagrant et vmware. Pour cela il faut [télécharger le binaire d'installation sur le site de Vagrant](https://www.vagrantup.com/vmware/downloads). Il suffit de là aussi de dérouler l'installation.
+Malgré l'installation du plugin, il faut aussi installer l'utilitaire qui permettra de mettre en relation Vagrant et vmware. Pour cela il faut [télécharger le binaire d'installation sur le site de Vagrant](https://www.vagrantup.com/vmware/downloads). Il suffit de dérouler l'installation.
 
 Tous les modules sont à présent installés et vous pouvez avec une image du Vagrant Cloud déployer vos VMs avec Vagrant.
 
