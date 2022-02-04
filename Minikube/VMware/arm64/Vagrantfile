@@ -36,6 +36,13 @@ Vagrant.configure("2") do |config|
         sudo systemctl enable docker.service
         sudo swapoff -a
         sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+        sudo chmod 700 get_helm.sh
+        sudo bash get_helm.sh
+        sudo rm get-docker.sh
+        sudo rm get_helm.sh
+        echo "L'adresse IP de votre machine $HOSTNAME est : $(ip -f inet addr show enp1s4 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')"
+        echo "Pour démarrer Minikube tapez la commande : minikube start --driver=none"
         SHELL
     end
   

@@ -1,0 +1,46 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.define "ansible" do |ansible|
+      ansible.vm.box = "centos/7"
+      ansible.vm.network "private_network", ip: "172.168.99.10"
+      ansible.vm.hostname = "ansible"
+      ansible.vm.provider "vmware_desktop" do |v|
+        v.vmx["memsize"] = 2048
+        v.vmx["numvcpus"] = 2
+      end
+      ansible.vm.provision "shell", inline: <<-SHELL
+      sudo yum update -y
+      sudo yum install epel-release -y
+      sudo yum install python3 -y
+      sudo yum install python-pip -y
+      sudo yum install ansible -y
+      sudo yum install -y sshpass
+      echo "L'adresse IP de votre machine $HOSTNAME est : $(ip -f inet addr show enp1s4 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')"
+      SHELL
+    end
+
+    clients=1
+    ram_client=2048
+    cpu_client=2
+
+    (1..clients).each do |i|
+      config.vm.define "client#{i}" do |client|
+        client.vm.box = "centos/7"
+        client.vm.network "private_network", ip: "172.168.99.1#{i}"
+        client.vm.hostname = "client#{i}"
+        client.vm.provider "vmware_desktop" do |v|
+            v.vmx["memsize"] = ram_client
+            v.vmx["numvcpus"] = cpu_client
+          end
+        client.vm.provision "shell", inline: <<-SHELL
+          sudo yum update -y
+          sudo yum install epel-release -y
+          sudo yum install python3 -y
+          sudo yum install python-pip -y
+          echo "L'adresse IP de votre machine $HOSTNAME est : $(ip -f inet addr show enp1s4 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')"
+        SHELL
+      end
+    end
+  end

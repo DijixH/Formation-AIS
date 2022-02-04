@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.define "ansible" do |ansible|
+      ansible.vm.box = "bytesguy/ubuntu-server-21.10-arm64"
+      ansible.vm.network "private_network", ip: "172.168.99.10"
+      ansible.vm.hostname = "ansible"
+      ansible.vm.provider "vmware_desktop" do |v|
+        v.vmx["memsize"] = 2048
+        v.vmx["numvcpus"] = 2
+      end
+      ansible.vm.provision "shell", inline: <<-SHELL
+      apt-get update -y
+      sudo apt-get install python3-pip -y
+      sudo apt-get install software-properties-common -y
+      sudo add-apt-repository --yes --update ppa:ansible/ansible
+      sudo apt install ansible -y
+      echo "L'adresse IP de votre machine $HOSTNAME est : $(ip -f inet addr show enp1s4 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')"
+      SHELL
+    end
+
+    clients=1
+    ram_client=2048
+    cpu_client=2
+
+    (1..clients).each do |i|
+      config.vm.define "client#{i}" do |client|
+        client.vm.box = "bytesguy/ubuntu-server-21.10-arm64"
+        client.vm.network "private_network", ip: "172.168.99.1#{i}"
+        client.vm.hostname = "client#{i}"
+        client.vm.provider "vmware_desktop" do |v|
+            v.vmx["memsize"] = ram_client
+            v.vmx["numvcpus"] = cpu_client
+          end
+        client.vm.provision "shell", inline: <<-SHELL
+          apt-get update
+          sudo apt-get install python3-pip
+          echo "L'adresse IP de votre machine $HOSTNAME est : $(ip -f inet addr show enp1s4 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')"
+        SHELL
+      end
+    end
+  end
