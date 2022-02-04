@@ -7,3 +7,9 @@ Elle installe :
 - Kubernetes (kubectl)
 - Minikube
 - Toutes les dépendances nécessaires
+
+Pour ajouter l'auto-completion des commandes Kubernetes il est necessaire de taper les commandes suivantes :
+```console
+$ source <(kubectl completion bash)
+$ echo "source <(kubectl completion bash)" >> ~/.bashrc
+```
