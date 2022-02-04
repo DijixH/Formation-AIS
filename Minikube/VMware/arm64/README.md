@@ -6,6 +6,7 @@ Elle installe :
 - Docker
 - Kubernetes (kubectl)
 - Minikube
+- Helm
 - Toutes les dépendances nécessaires
 
 Pour ajouter l'auto-completion des commandes Kubernetes il est necessaire de taper les commandes suivantes :
