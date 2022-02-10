@@ -30,7 +30,7 @@ Tous les modules sont à présent installés et vous pouvez avec une image du Va
 Il suffit de l'activer avec la commande suivante :
 ```console
 $ vagrant autocomplete install --bash --zsh
-
+```
 
 ## Troubleshooting 
 
