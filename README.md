@@ -25,6 +25,13 @@ Malgré l'installation du plugin, il faut aussi installer l'utilitaire qui perme
 
 Tous les modules sont à présent installés et vous pouvez avec une image du Vagrant Cloud déployer vos VMs avec Vagrant.
 
+## Auto-Completion des commandes Vagrant
+
+Il suffit de l'activer avec la commande suivante :
+```console
+$ vagrant autocomplete install --bash --zsh
+
+
 ## Troubleshooting 
 
 ### VMware Fusion Tech Preview (Mac M1)
