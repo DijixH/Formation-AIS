@@ -1,0 +1,35 @@
+- name: play1
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Installation Apache & curl CentOS
+      block:
+        - name: Installation Apache2 & curl
+          yum:
+            name:
+              - curl
+              - httpd
+            state: latest
+            update_cache: yes
+        - name: Activation service apache
+          systemd:
+            name: httpd
+            state: started
+            enabled: yes
+      when: ansible_facts['distribution'] == 'CentOS'
+      ignore_errors: yes
+    
+    - name: Installation Apache2 Ubuntu
+      block:
+        - name: Installation Apache2
+          apt:
+            name:
+              - apache2
+            state: absent
+            update_cache: yes
+      when: ansible_facts['distribution'] == 'Ubuntu'
+      ignore_errors: yes
+  tags:
+    - apache
+    - curl
+

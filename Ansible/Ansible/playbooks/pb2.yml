@@ -1,0 +1,29 @@
+- name: play1
+  hosts: centwebservers
+  become: true
+  gather_facts: yes
+  tags:
+    - apache
+  vars:
+    - template_dir: /var/www/html/index.html
+  tasks:
+    - name: Page web perso centos
+      template:
+        src: /home/ubuntu/ansible/templates/machine.html.j2
+        dest: "{{ template_dir }}"
+        owner: apache
+        group: apache
+        mode: '0644'
+      notify: 
+        - Restart Apache
+  handlers:
+    - name: Restart Apache
+      service:
+        name: httpd
+        state: restarted
+  ignore_errors: yes
+
+
+
+
+

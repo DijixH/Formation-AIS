@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Machine {{ inventory_hostname }}</title>
+    </head>
+
+    <body style="background-color:#00FEF1">
+        <h1>Bonjour</h1>
+        <p>Cette machine porte le nom de {{ inventory_hostname }} </br>
+        Distribution : {{ ansible_distribution }} </br>
+        Version de la distribution : {{ ansible_distribution_version }} </br>
+        Interfaces réseau : {{ ansible_interfaces }} </br>
+        Interface principale : {{ansible_default_ipv4.interface}} </br>
+        Addresse IP : {{ansible_default_ipv4.alias}} {{ansible_default_ipv4.netmask}} </br>
+        Architecture : {{ ansible_architecture }} </br>
+        </p>
+    </body>
+
+</html>

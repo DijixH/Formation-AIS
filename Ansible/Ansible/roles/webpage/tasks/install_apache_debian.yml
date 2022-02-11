@@ -1,0 +1,9 @@
+- name: Installation d'Apache sur les OS Debian
+  ansible.builtin.apt:
+    name: "apache2"
+    state: present
+
+- name: Activation apache2
+  ansible.builtin.service:
+    name: "apache2"
+    state: started

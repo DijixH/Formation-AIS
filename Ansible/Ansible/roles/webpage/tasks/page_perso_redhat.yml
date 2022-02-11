@@ -1,0 +1,7 @@
+- name: Page web perso RHEL OS
+  template:
+    src: machine.html.j2
+    dest: /var/www/html/index.html
+    owner: apache
+    group: apache
+    mode: '0644'

@@ -1,0 +1,19 @@
+- name: Installe le bon server web pour les OS RHEL
+  import_tasks: install_apache_redhat.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+
+- name: Installe le bon server web pour les OS Debian
+  import_tasks: install_apache_debian.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+
+- name: Installer page perso Debian OS
+  import_tasks: page_perso_debian.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+  notify:
+  - restart_apache
+
+- name: Installer page perso RHEL OS
+  import_tasks: page_perso_redhat.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+  notify:
+  - restart_httpd

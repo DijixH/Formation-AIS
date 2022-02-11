@@ -1,0 +1,32 @@
+### This is a YAML representation of the profile.
+### Any line starting with a '# will be ignored.
+###
+### A profile consists of a set of configuration items followed by a set of
+### devices.
+###
+### An example would look like:
+### name: onenic
+### config:
+###   raw.lxc: lxc.aa_profile=unconfined
+### devices:
+###   eth0:
+###     nictype: bridged
+###     parent: lxdbr0
+###     type: nic
+###
+### Note that the name is shown but cannot be changed
+
+config:
+  user.user-data: |
+    #cloud-config
+    package_update: true
+    packages:
+      - openssh-server
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCfKYbbeFk2jHgQ9LD6G53T+v+DoBhC2b/vIghw0XQBYssvIcPuWPk4yQpVsWoketWp7WNQIGS0cl/O49FBUWyxKsRWMJ+bo9q/85lqoMfCQJ9t/sboUyNy67hElNKJpC6mne6B6IFo/VpuSUWVwMOnNoUa45jUymG8HY9V7isZL09Xi1sxD8ysksi9C8BS47QaHBxS74ktIqJiwnM5mF8wuCWw/ts92nqAsD4MDPP9KAxuHQsybbs1/PpyAh58TbjHKMLLdoJO/HtqusO8c/oNx72eIDJOMErI2iCmF9prTG9/0ALYfPZmoLHtUfGxjT5DiBkEBX+lSXxYDYZMFjI9/1pAQWBGcXxLBFW+176KQiDnzfxznv34Md6gcAhIKvBEHH41JPcOn+BlLVFn6SBFXjm+7BmAfxBTBigWIfBsDyARERR34ciHMuA8/pH81TedeqJdNR4k8nScQf9wqerqH6ht8Ovz1ID+Hq5V5a1KZSndzdCeZyY2IB5FUAW1cp8= ubuntu@controller
+    runcmd:
+      systemctl enable --now sshd
+description: ""
+devices: {}
+name: ansible
+used_by:

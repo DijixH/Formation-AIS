@@ -1,0 +1,49 @@
+- name: play1
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Installation Apache & curl CentOS
+      block:
+        - name: Installation Apache2 & curl
+          yum:
+            name:
+              - curl
+              - httpd
+            state: latest
+            update_cache: yes
+        - name: Activation service apache
+          systemd:
+            name: httpd
+            state: started
+            enabled: yes
+        - name: Page web perso centos
+          template:
+            src: /home/ubuntu/ansible/templates/machine.html.j2
+            dest: /var/www/html/index.html
+            owner: apache
+            group: apache
+            mode: '0644'
+      when: ansible_facts['distribution'] == 'CentOS'
+      ignore_errors: yes
+    
+    - name: Installation Apache2 Ubuntu
+      block:
+        - name: Installation Apache2
+          apt:
+            name:
+              - apache2
+            state: latest
+            update_cache: yes
+        - name: Page web perso ubuntu
+          template:
+            src: /home/ubuntu/ansible/templates/machine.html.j2
+            dest: /var/www/html/index.html
+            owner: www-data
+            group: www-data
+            mode: '0644'
+      when: ansible_facts['distribution'] == 'Ubuntu'
+      ignore_errors: yes
+  tags:
+    - apache
+    - curl
+

@@ -1,0 +1,9 @@
+- name: Installation d'Apache sur les OS Redhat
+  ansible.builtin.yum:
+    name: "httpd"
+    state: present
+
+- name: Activation httpd
+  ansible.builtin.service:
+    name: "httpd"
+    state: started

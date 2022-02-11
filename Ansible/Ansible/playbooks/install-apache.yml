@@ -1,0 +1,9 @@
+- hosts: webservers
+  become: true
+  tasks:
+    - name: Installation Apache2
+      apt:
+        name:
+          - apache2
+        state: absent
+        update_cache: yes

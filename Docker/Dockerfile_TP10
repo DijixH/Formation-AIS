@@ -1,0 +1,8 @@
+FROM nginx
+LABEL maintainer='thtom'
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install git -y
+RUN rm -Rf /usr/share/nginx/html/*
+RUN git clone https://github.com/DijixH/StaticDimensionWebSite.git /usr/share/nginx/html/ && mv /usr/share/nginx/html/src/* /usr/share/nginx/html/  && rm -rf /usr/share/nginx/html/src
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/nginx", "-g", "daemon off;"]
