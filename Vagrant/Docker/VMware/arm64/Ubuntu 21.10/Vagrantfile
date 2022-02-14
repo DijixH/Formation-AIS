@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
        sudo usermod -aG docker vagrant
        sudo systemctl enable docker
        sudo systemctl start docker
-       echo "L'adresse IP de votre machine $HOSTNAME est : $(ip -f inet addr show enp1s4 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')"
+       echo "L'adresse IP de votre machine $HOSTNAME est : $(hostname -I)"
     SHELL
   end
   
